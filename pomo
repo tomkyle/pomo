@@ -2,9 +2,9 @@
 
 CURRENT_DIR="${PWD}"
 
-if [ -d "${CURRENT_DIR}/locale/de_DE/LC_MESSAGES" ]; then
-	cd "${CURRENT_DIR}/locale/de_DE/LC_MESSAGES" && find . -maxdepth 1 -name \*.po -execdir sh -c 'msgfmt "$0" -o `basename $0 .po`.mo' '{}' \;
-	cd "${CURRENT_DIR}/locale/fr_CH/LC_MESSAGES" && find . -maxdepth 1 -name \*.po -execdir sh -c 'msgfmt "$0" -o `basename $0 .po`.mo' '{}' \;
+if [ -d "${CURRENT_DIR}/locales/de_DE/LC_MESSAGES" ]; then
+	cd "${CURRENT_DIR}/locales/de_DE/LC_MESSAGES" && find . -maxdepth 1 -name \*.po -execdir sh -c 'msgfmt "$0" -o `basename $0 .po`.mo' '{}' \;
+	cd "${CURRENT_DIR}/locales/fr_CH/LC_MESSAGES" && find . -maxdepth 1 -name \*.po -execdir sh -c 'msgfmt "$0" -o `basename $0 .po`.mo' '{}' \;
 else
 	echo "Could not find directory with PO files, possibly in wrong directory?"
 	exit 1
