@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 
 CURRENT_DIR="${PWD}"
+LOCALES_DIR=${1:-"${PWD}/locales"}
 
-if [ -d "${CURRENT_DIR}/locales/de_DE/LC_MESSAGES" ]; then
-	cd "${CURRENT_DIR}/locales/de_DE/LC_MESSAGES" && find . -maxdepth 1 -name \*.po -execdir sh -c 'msgfmt "$0" -o `basename $0 .po`.mo' '{}' \;
-	cd "${CURRENT_DIR}/locales/fr_CH/LC_MESSAGES" && find . -maxdepth 1 -name \*.po -execdir sh -c 'msgfmt "$0" -o `basename $0 .po`.mo' '{}' \;
-else
-	echo "Could not find directory with PO files, possibly in wrong directory?"
+if [ ! -d "${LOCALES_DIR}" ]; then
+	echo "Could not find directory '${LOCALES_DIR}' with PO files, possibly in wrong wrong directory?"
 	exit 1
 fi
+
+cd "${LOCALES_DIR}" && find . -maxdepth 2 -name \*.po -execdir sh -c 'msgfmt "$0" -o `basename $0 .po`.mo' '{}' \;
+cd "${CURRENT_DIR}" || exit 1
+echo "Done."
+
 
